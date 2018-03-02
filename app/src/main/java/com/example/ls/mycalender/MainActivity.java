@@ -152,4 +152,6 @@ public class MainActivity extends AppCompatActivity {
         //mCalendarDateView.setCurrentItem(scrollview-1);
 
     }
+
+    //TODO 最后  什么点击之后大原点的颜色去  background_item里面修改  整个背景的颜色去background_main里面
 }
