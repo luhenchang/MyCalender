@@ -1,9 +1,7 @@
 package com.example.ls.mycalender;
 
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
     ListView list;
     @BindView(R.id.activity_main)
     LinearLayout activityMain;
+    @BindView(R.id.backto)
+    ImageView backto;
     private int scrollview_page;
     private TextView circle;
 
@@ -143,15 +143,22 @@ public class MainActivity extends AppCompatActivity {
     private String getDisPlayNumber(int num) {
         return num < 10 ? "0" + num : "" + num;
     }
-
     //TODO 我人懒你们自己设置自己的左右点击按钮去切换自己的月份吧。我这里返回键作为月份逐渐减少来展示对应的页面的。右边的你们搞一个scrollview++
-    @OnClick(R.id.back)
-    public void onClick() {
-        scrollview_page--;
-        calendarDateView.setCurrentItem(scrollview_page, true);
-        //mCalendarDateView.setCurrentItem(scrollview-1);
-
+    @OnClick({R.id.back, R.id.backto})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.back:
+                scrollview_page--;
+                calendarDateView.setCurrentItem(scrollview_page, true);
+                break;
+            case R.id.backto:
+                scrollview_page++;
+                calendarDateView.setCurrentItem(scrollview_page, true);
+                break;
+        }
     }
+
+
 
     //TODO 最后  什么点击之后大原点的颜色去  background_item里面修改  整个背景的颜色去background_main里面
 }
