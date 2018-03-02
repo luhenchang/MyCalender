@@ -48,7 +48,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        //TODO 0  去grandle依赖
+        /*
+     allprojects {
+      repositories {
+            maven { url 'https://jitpack.io' }
+                   }
+                }
+        dependencies {
 
+            compile 'com.github.codbking:CalendarExaple:v1.0.0'
+
+        }
+        *
+        *
+        *
+        * */
         calendarDateView.setAdapter(new CaledarAdapter() {
             @Override
             public View getView(View convertView, ViewGroup parentView, CalendarBean bean) {
@@ -61,13 +76,13 @@ public class MainActivity extends AppCompatActivity {
                 //TODO 1布局 item_calendar 进入里面去设置自己展示文字样式   自己的什么小红点位置之类的。
 
                 view = (TextView) convertView.findViewById(R.id.text);
-                circle= (TextView) convertView.findViewById(R.id.circlae);
+                circle = (TextView) convertView.findViewById(R.id.circlae);
                 view.setText("" + bean.day);
 
                 //TODO 2 小红点   这里我自己瞎几把判断的天来判断小红点是否显示。你自己根据需求去显示把
-                if(bean.day==1||bean.day==10||bean.day==6){
+                if (bean.day == 1 || bean.day == 10 || bean.day == 6) {
                     circle.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     circle.setVisibility(View.GONE);
                 }
                 if (bean.mothFlag != 0) {
@@ -122,16 +137,18 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //TODO 4 获取当前月份所在的页面   这里scrollview是一个很大的int行数字23121之类的。因为我们年月开始到现在都多少个月呢？几万个了。所以很大。
-        scrollview_page=calendarDateView.getCurrentItem();
+        scrollview_page = calendarDateView.getCurrentItem();
     }
+
     private String getDisPlayNumber(int num) {
         return num < 10 ? "0" + num : "" + num;
     }
+
     //TODO 我人懒你们自己设置自己的左右点击按钮去切换自己的月份吧。我这里返回键作为月份逐渐减少来展示对应的页面的。右边的你们搞一个scrollview++
     @OnClick(R.id.back)
     public void onClick() {
         scrollview_page--;
-        calendarDateView.setCurrentItem(scrollview_page,true);
+        calendarDateView.setCurrentItem(scrollview_page, true);
         //mCalendarDateView.setCurrentItem(scrollview-1);
 
     }
