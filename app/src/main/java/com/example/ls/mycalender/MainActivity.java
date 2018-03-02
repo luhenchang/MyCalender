@@ -116,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
                 TextView textView = (TextView) convertView;
                 textView.setText("item" + position);
 
+
                 return convertView;
             }
         });
