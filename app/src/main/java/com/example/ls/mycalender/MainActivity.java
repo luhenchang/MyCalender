@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     ListView list;
     @BindView(R.id.activity_main)
     LinearLayout activityMain;
-    private int scrollview;
+    private int scrollview_page;
     private TextView circle;
 
     @Override
@@ -58,10 +58,13 @@ public class MainActivity extends AppCompatActivity {
                     ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(px(48), px(48));
                     convertView.setLayoutParams(params);
                 }
+                //TODO 1布局 item_calendar 进入里面去设置自己展示文字样式   自己的什么小红点位置之类的。
 
                 view = (TextView) convertView.findViewById(R.id.text);
                 circle= (TextView) convertView.findViewById(R.id.circlae);
                 view.setText("" + bean.day);
+
+                //TODO 2 小红点   这里我自己瞎几把判断的天来判断小红点是否显示。你自己根据需求去显示把
                 if(bean.day==1||bean.day==10||bean.day==6){
                     circle.setVisibility(View.VISIBLE);
                 }else{
@@ -76,23 +79,8 @@ public class MainActivity extends AppCompatActivity {
                 return convertView;
             }
         });
+        //TODO 3 日期显示   这里来确定你点击之后显示的年月日。自己搞去。简单。
 
-        calendarDateView.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                Log.e("scroll=",""+position);
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
         calendarDateView.setOnItemClickListener(new CalendarView.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int postion, CalendarBean bean) {
@@ -131,16 +119,17 @@ public class MainActivity extends AppCompatActivity {
                 return convertView;
             }
         });
-        scrollview=calendarDateView.getCurrentItem();
+        //TODO 4 获取当前月份所在的页面   这里scrollview是一个很大的int行数字23121之类的。因为我们年月开始到现在都多少个月呢？几万个了。所以很大。
+        scrollview_page=calendarDateView.getCurrentItem();
     }
     private String getDisPlayNumber(int num) {
         return num < 10 ? "0" + num : "" + num;
     }
-
+    //TODO 我人懒你们自己设置自己的左右点击按钮去切换自己的月份吧。我这里返回键作为月份逐渐减少来展示对应的页面的。右边的你们搞一个scrollview++
     @OnClick(R.id.back)
     public void onClick() {
-        scrollview--;
-        calendarDateView.setCurrentItem(scrollview,true);
+        scrollview_page--;
+        calendarDateView.setCurrentItem(scrollview_page,true);
         //mCalendarDateView.setCurrentItem(scrollview-1);
 
     }
