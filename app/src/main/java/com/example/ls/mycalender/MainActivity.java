@@ -119,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
                 return convertView;
             }
         });
+
         //TODO 4 获取当前月份所在的页面   这里scrollview是一个很大的int行数字23121之类的。因为我们年月开始到现在都多少个月呢？几万个了。所以很大。
         scrollview_page=calendarDateView.getCurrentItem();
     }
